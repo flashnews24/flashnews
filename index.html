@@ -4,8 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>فلاش نيوز | أخبار عاجلة لحظة بلحظة</title>
-  <link rel="icon" type="image/png" href="favicon.png">
+
+  <!-- أيقونة المتصفح -->
+  <link rel="icon" href="favicon.png" type="image/png" />
+
+  <!-- خط عربي احترافي -->
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- تنسيقات -->
   <style>
     body {
       margin: 0;
@@ -16,61 +22,90 @@
 
     header {
       background: linear-gradient(90deg, #5a2a82, #36d7b7);
-      padding: 20px;
+      padding: 30px 20px;
       text-align: center;
-      color: white;
-      position: relative;
+    }
+
+    header .logo-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
 
     header img {
-      height: 60px;
-      vertical-align: middle;
+      height: 100px;
+      margin-bottom: 10px;
     }
 
     header h1 {
-      display: inline-block;
-      margin: 0 10px;
-      font-size: 28px;
-      vertical-align: middle;
+      margin: 0;
+      font-size: 2.8rem;
+      color: white;
+      text-shadow: 0 0 8px rgba(0,0,0,0.3);
     }
 
     nav {
-      background-color: white;
-      padding: 15px;
-      text-align: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      background-color: #fff;
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      padding: 15px 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
     nav a {
-      margin: 0 15px;
-      color: #5a2a82;
       text-decoration: none;
+      color: #5a2a82;
       font-weight: bold;
+      font-size: 1.1rem;
+      transition: color 0.3s;
     }
 
-    .news-section {
-      padding: 20px;
+    nav a:hover {
+      color: #36d7b7;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 0 20px;
     }
 
     .news-card {
-      background-color: white;
+      background-color: #fff;
+      border-radius: 10px;
       padding: 20px;
       margin-bottom: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     }
 
     .news-card h2 {
       margin-top: 0;
       color: #5a2a82;
     }
+
+    .news-card p {
+      line-height: 1.6;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #eee;
+      color: #777;
+      font-size: 0.9rem;
+      margin-top: 40px;
+    }
   </style>
 </head>
 <body>
 
   <header>
-    <img src="logo.png" alt="FlashNews Logo">
-    <h1>فلاش نيوز</h1>
+    <div class="logo-container">
+      <img src="logo.png" alt="شعار فلاش نيوز">
+      <h1>فلاش نيوز</h1>
+    </div>
   </header>
 
   <nav>
@@ -82,17 +117,21 @@
     <a href="#">تكنولوجيا</a>
   </nav>
 
-  <section class="news-section">
+  <main>
     <div class="news-card">
-      <h2>📢 عاجل: حدث عالمي كبير يثير اهتمام الجميع</h2>
-      <p>شهدت الساحة الدولية اليوم تطورات خطيرة قد تُغير مجرى العلاقات بين الدول الكبرى، وسنوافيكم بالتفاصيل أولاً بأول.</p>
+      <h2>🚨 عاجل: حدث عالمي يثير الجدل</h2>
+      <p>شهدت الساحة الدولية اليوم تطورات متسارعة، ترقبوا المزيد من التفاصيل على فلاش نيوز.</p>
     </div>
 
     <div class="news-card">
-      <h2>📱 تكنولوجيا: إطلاق هاتف ثوري بتقنيات خرافية</h2>
-      <p>كشفت شركة كبرى عن هاتفها الجديد الذي يتميز بكاميرا 200 ميجابيكسل، وشاشة قابلة للطي، وبطارية تدوم يومين بشحنة واحدة.</p>
+      <h2>📱 جديد التكنولوجيا: هاتف بمواصفات خرافية</h2>
+      <p>أطلقت الشركة العملاقة هاتفًا جديدًا يحتوي على أحدث التقنيات في عالم الهواتف الذكية.</p>
     </div>
-  </section>
+  </main>
+
+  <footer>
+    &copy; 2025 فلاش نيوز - جميع الحقوق محفوظة
+  </footer>
 
 </body>
 </html>
