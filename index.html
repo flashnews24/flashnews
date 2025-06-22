@@ -1,95 +1,126 @@
-
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>فلاش نيوز</title>
-<style>
-  body {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #121014;
-    color: #e0e0e0;
-  }
-  header {
-    background-color: #5a2a82;
-    padding: 20px;
-    text-align: center;
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #f0f0f0;
-    text-shadow: 0 0 10px #36d7b7;
-  }
-  nav {
-    background-color: #36d7b7;
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    padding: 15px 0;
-    font-size: 1.2rem;
-    font-weight: 600;
-    box-shadow: 0 4px 8px rgba(54, 215, 183, 0.3);
-  }
-  nav a {
-    color: #121014;
-    text-decoration: none;
-    transition: color 0.3s;
-  }
-  nav a:hover {
-    color: #f7f73c;
-    text-shadow: 0 0 8px #f7f73c;
-  }
-  main {
-    max-width: 900px;
-    margin: 30px auto;
-    padding: 0 20px;
-  }
-  article {
-    background-color: #1f1a2f;
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 25px;
-    box-shadow: 0 0 15px #f7f73c;
-    transition: box-shadow 0.3s;
-  }
-  article:hover {
-    box-shadow: 0 0 25px #f7f73c;
-  }
-  article h2 {
-    color: #f7f73c;
-    margin-bottom: 10px;
-  }
-  article p {
-    line-height: 1.6;
-    font-size: 1rem;
-    color: #d9d9d9;
-  }
-  footer {
-    text-align: center;
-    padding: 15px;
-    color: #888;
-    font-size: 0.9rem;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>فلاش نيوز | أخبار عاجلة لحظة بلحظة</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Cairo', sans-serif;
+      background-color: #f4f4f4;
+      color: #222;
+    }
+
+    header {
+      background: linear-gradient(90deg, #5a2a82, #36d7b7);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: bold;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 10px 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #5a2a82;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #36d7b7;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    article {
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 20px;
+      margin-bottom: 25px;
+      transition: transform 0.3s;
+    }
+
+    article:hover {
+      transform: scale(1.02);
+    }
+
+    article h2 {
+      color: #5a2a82;
+      margin-bottom: 10px;
+      font-size: 1.5rem;
+    }
+
+    article p {
+      line-height: 1.8;
+      color: #333;
+      font-size: 1.1rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #666;
+      background-color: #fafafa;
+      border-top: 1px solid #ddd;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        flex-wrap: wrap;
+      }
+      nav a {
+        margin: 10px;
+      }
+    }
+  </style>
 </head>
 <body>
   <header>فلاش نيوز</header>
   <nav>
     <a href="#">الرئيسية</a>
-    <a href="#">عالمي</a>
+    <a href="#">أخبار عاجلة</a>
     <a href="#">محلي</a>
+    <a href="#">دولي</a>
     <a href="#">رياضة</a>
     <a href="#">تكنولوجيا</a>
   </nav>
   <main>
     <article>
-      <h2>عاجل: حدث كبير يهز الساحة العالمية</h2>
-      <p>في خبر عاجل، شهد العالم اليوم تطورات هامة في مجال السياسة الدولية تؤثر على العلاقات بين الدول الكبرى.</p>
+      <h2>🚨 عاجل: حدث عالمي كبير يثير اهتمام الجميع</h2>
+      <p>شهدت الساحة الدولية اليوم تطورات خطيرة قد تغيّر مجرى العلاقات بين الدول الكبرى، وسنوافيكم بالتفاصيل أولًا بأول.</p>
     </article>
+
     <article>
-      <h2>تكنولوجيا: إطلاق هاتف جديد بمواصفات مذهلة</h2>
-      <p>كشفت شركة التقنية الشهيرة عن هاتفها الجديد الذي يأتي بتقنيات متقدمة تجعله من أفضل الهواتف في السوق.</p>
+      <h2>📱 تكنولوجيا: إطلاق هاتف ثوري بتقنيات خرافية</h2>
+      <p>كشفت شركة كبرى عن هاتفها الجديد الذي يتميز بكاميرا 200 ميجابيكسل، وشاشة قابلة للطي، وبطارية تدوم يومين بشحنة واحدة.</p>
+    </article>
+
+    <article>
+      <h2>⚽️ رياضة: نجم مشهور ينتقل إلى نادي جديد بمبلغ قياسي</h2>
+      <p>في صفقة مفاجئة، أعلن نادي كبير عن التوقيع مع أحد أبرز نجوم الكرة العالمية في صفقة هي الأغلى في تاريخ الدوري.</p>
     </article>
   </main>
   <footer>© 2025 فلاش نيوز - جميع الحقوق محفوظة</footer>
