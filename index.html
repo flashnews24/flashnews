@@ -2,10 +2,16 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>فلاش نيوز</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>فلاش نيوز | أخبار عاجلة لحظة بلحظة</title>
+
+  <!-- أيقونة الموقع -->
   <link rel="icon" type="image/png" href="favicon.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- خطوط -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- تنسيق -->
   <style>
     body {
       margin: 0;
@@ -18,94 +24,76 @@
       background: linear-gradient(90deg, #5a2a82, #36d7b7);
       padding: 20px;
       text-align: center;
+      color: white;
     }
 
-    .logo-header {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
+    header img {
+      height: 80px;
+      margin-bottom: 10px;
     }
 
-    .logo-header img {
-      height: 100px;
-    }
-
-    .logo-header h1 {
+    header h1 {
       margin: 0;
-      font-size: 2.8rem;
-      font-weight: bold;
-      color: #f0f0f0;
-      text-shadow: 0 0 10px #36d7b7;
+      font-size: 2.5rem;
     }
 
     nav {
-      background-color: #36d7b7;
+      background-color: #fff;
       display: flex;
       justify-content: center;
-      gap: 30px;
-      padding: 15px 0;
-      font-size: 1.2rem;
-      font-weight: 600;
-      box-shadow: 0 4px 8px rgba(54, 215, 183, 0.3);
+      gap: 20px;
+      padding: 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
     nav a {
-      color: #121014;
       text-decoration: none;
+      color: #5a2a82;
+      font-weight: bold;
       transition: color 0.3s;
     }
 
     nav a:hover {
-      color: #f7f73c;
-      text-shadow: 0 0 8px #f7f73c;
+      color: #36d7b7;
     }
 
     main {
-      max-width: 900px;
-      margin: 30px auto;
-      padding: 0 20px;
-    }
-
-    article {
-      background-color: #fff;
-      border-radius: 10px;
       padding: 20px;
-      margin-bottom: 25px;
-      box-shadow: 0 0 15px #ddd;
-      transition: box-shadow 0.3s;
     }
 
-    article:hover {
-      box-shadow: 0 0 25px #ccc;
+    .news-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      padding: 20px;
+      margin-bottom: 20px;
     }
 
-    article h2 {
+    .news-card h2 {
+      margin: 0 0 10px;
+      font-size: 1.4rem;
       color: #5a2a82;
-      margin-bottom: 10px;
     }
 
-    article p {
+    .news-card p {
+      margin: 0;
       line-height: 1.6;
-      font-size: 1rem;
-      color: #333;
     }
 
     footer {
       text-align: center;
       padding: 15px;
+      background-color: #eee;
       color: #666;
-      font-size: 0.9rem;
+      margin-top: 40px;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <div class="logo-header">
-      <img src="logo_large.png" alt="FlashNews Logo">
-      <h1>فلاش نيوز</h1>
-    </div>
+    <img src="logo_large.png" alt="FlashNews Logo" />
+    <h1>فلاش نيوز</h1>
   </header>
 
   <nav>
@@ -118,18 +106,19 @@
   </nav>
 
   <main>
-    <article>
-      <h2>🔔 عاجل: حدث عالمي كبير يثير اهتمام الجميع</h2>
-      <p>شهدت الساحة الدولية اليوم تطورات خطيرة قد تُغير مجرى العلاقات بين الدول الكبرى، وسنوافيكم بالتفاصيل أولاً بأول.</p>
-    </article>
-    <article>
+    <div class="news-card">
+      <h2>🚨 عاجل: حدث عالمي كبير يثير اهتمام الجميع</h2>
+      <p>شهدت الساحة الدولية اليوم تطورات خطيرة قد تغيّر مجرى العلاقات بين الدول الكبرى، وسنوافيكم بالتفاصيل أولاً بأول.</p>
+    </div>
+
+    <div class="news-card">
       <h2>📱 تكنولوجيا: إطلاق هاتف ثوري بتقنيات خرافية</h2>
       <p>كشفت شركة كبرى عن هاتفها الجديد الذي يتميز بكاميرا 200 ميجابيكسل، وشاشة قابلة للطي، وبطارية تدوم يومين بشحنة واحدة.</p>
-    </article>
+    </div>
   </main>
 
   <footer>
-    © 2025 فلاش نيوز - جميع الحقوق محفوظة
+    &copy; 2025 فلاش نيوز - جميع الحقوق محفوظة
   </footer>
 
 </body>
