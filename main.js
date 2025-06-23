@@ -1,59 +1,49 @@
-// main.js - فلاش نيوز
+// رابط API الخاص بالأخبار الحقيقية
+const apiUrl = 'https://flashnews-api.onrender.com';
 
-const apiURL = "https://flashnews-api.onrender.com/main.json";
-const container = document.getElementById("main-news");
+async function fetchNews() {
+  try {
+    const response = await fetch(apiUrl);
+    const data = await response.json();
 
-function fetchNews() {
-  fetch(apiURL)
-    .then(res => res.json())
-    .then(data => displayNews(data))
-    .catch(err => console.error("خطأ في تحميل الأخبار:", err));
+    if (data.status === 'success') {
+      displayNews(data.news);
+    } else {
+      console.error('فشل في تحميل الأخبار:', data);
+    }
+  } catch (error) {
+    console.error('خطأ في الاتصال بـ API:', error);
+  }
 }
 
-function displayNews(newsList) {
-  const loading = container.querySelector(".loading");
-  if (loading) loading.remove();
+function displayNews(newsArray) {
+  const newsContainer = document.getElementById('news-container');
+  newsContainer.innerHTML = '';
 
-  container.innerHTML = "";
+  newsArray.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'news-card';
 
-  newsList.forEach(news => {
-    const card = document.createElement("div");
-    card.className = "news-card";
+    const title = document.createElement('h3');
+    title.textContent = item.title;
 
-    card.innerHTML = `
-      <img src="${news.image}" alt="صورة الخبر">
-      <div class="news-content">
-        <h3>${news.title}</h3>
-        <p>${news.summary}</p>
-        <div class="meta">
-          <span>${news.source}</span>
-          <span>${timeAgo(news.published_at)}</span>
-        </div>
-        <div class="actions">
-          <a href="${news.link}" target="_blank">قراءة الخبر</a>
-          <button onclick="copyLink('${news.link}')">نسخ الرابط</button>
-        </div>
-      </div>
-    `;
-    container.appendChild(card);
+    const source = document.createElement('p');
+    source.innerHTML = `<strong>المصدر:</strong> ${item.source}`;
+
+    const category = document.createElement('p');
+    category.innerHTML = `<strong>القسم:</strong> ${item.category}`;
+
+    const date = document.createElement('p');
+    date.innerHTML = `<strong>التاريخ:</strong> ${new Date(item.date).toLocaleString()}`;
+
+    card.appendChild(title);
+    card.appendChild(source);
+    card.appendChild(category);
+    card.appendChild(date);
+
+    newsContainer.appendChild(card);
   });
 }
 
-function timeAgo(dateStr) {
-  const now = new Date();
-  const past = new Date(dateStr);
-  const diff = Math.floor((now - past) / 1000);
-  if (diff < 60) return "الآن";
-  if (diff < 3600) return `${Math.floor(diff / 60)} دقيقة`;
-  if (diff < 86400) return `${Math.floor(diff / 3600)} ساعة`;
-  return `${Math.floor(diff / 86400)} يوم`;
-}
-
-function copyLink(link) {
-  navigator.clipboard.writeText(link)
-    .then(() => alert("تم نسخ الرابط ✅"))
-    .catch(() => alert("حدث خطأ أثناء النسخ"));
-}
-
-fetchNews();
-setInterval(fetchNews, 60000); // تحديث كل دقيقة
+// تشغيل جلب الأخبار عند تحميل الصفحة
+window.onload = fetchNews;
