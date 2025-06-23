@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>فلاش نيوز | أخبار لحظة بلحظة</title>
+  <title>فلاش نيوز | أخبار عاجلة لحظة بلحظة</title>
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     body {
       margin: 0;
       font-family: 'Cairo', sans-serif;
-      background-color: #ffffff;
+      background-color: #fdfdfd;
       color: #222;
       transition: background 0.3s, color 0.3s;
     }
@@ -22,13 +22,15 @@
 
     header {
       background: linear-gradient(90deg, #5a2a82, #36d7b7);
-      padding: 20px;
+      padding: 25px 20px;
       text-align: center;
       color: white;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
     header img {
-      height: 80px;
+      height: 90px;
+      max-width: 200px;
       margin-bottom: 10px;
     }
 
@@ -36,8 +38,9 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      background-color: #fff;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      background-color: white;
+      border-bottom: 1px solid #eee;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
     }
 
     nav a {
@@ -53,58 +56,70 @@
     }
 
     .container {
-      max-width: 900px;
-      margin: 20px auto;
+      max-width: 1000px;
+      margin: 30px auto;
       padding: 0 20px;
     }
 
     .news-card {
-      background: #fdfdfd;
-      margin-bottom: 15px;
+      background: white;
+      margin-bottom: 20px;
       padding: 15px;
       border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      box-shadow: 0 0 10px rgba(0,0,0,0.04);
       transition: 0.3s;
     }
 
     .news-card:hover {
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      box-shadow: 0 0 20px rgba(0,0,0,0.08);
     }
 
     .news-card h3 {
-      margin: 0 0 10px;
-      color: #4a148c;
+      margin: 0 0 8px;
+      font-size: 1.1rem;
+      color: #333;
     }
 
-    .news-card p {
-      margin: 0;
+    .news-card img.thumb {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
     }
 
-    .ticker {
-      background-color: #f0f0f0;
-      padding: 10px;
-      overflow: hidden;
-      white-space: nowrap;
-      box-shadow: inset 0 -1px 0 rgba(0,0,0,0.1);
+    .news-card small {
+      color: #666;
+      font-size: 0.85rem;
     }
 
-    .ticker span {
-      display: inline-block;
-      padding-left: 100%;
-      animation: scroll 20s linear infinite;
+    .news-card .actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
     }
 
-    @keyframes scroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-100%); }
+    .news-card .actions a {
+      color: #36d7b7;
+      text-decoration: none;
     }
 
-    .controls {
+    .fav-btn {
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: #ccc;
+    }
+
+    .fav-btn.active {
+      color: gold;
+    }
+
+    .controls, .filters {
       text-align: center;
-      margin: 10px 0;
+      margin: 15px 0;
     }
 
-    .controls button {
+    .controls button, .filters button {
       margin: 5px;
       padding: 8px 12px;
       border: none;
@@ -115,7 +130,7 @@
       font-weight: bold;
     }
 
-    .controls button:hover {
+    .controls button:hover, .filters button:hover {
       background: #2cb4a0;
     }
 
@@ -129,21 +144,28 @@
       font-size: 1rem;
     }
 
-    .fav-btn {
-      float: left;
-      font-size: 1.2rem;
-      cursor: pointer;
-      color: #ccc;
+    .ticker {
+      background-color: #f7f7f7;
+      padding: 10px;
+      overflow: hidden;
+      white-space: nowrap;
+      box-shadow: inset 0 -1px 0 rgba(0,0,0,0.1);
     }
 
-    .fav-btn.active {
-      color: gold;
+    .ticker span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scroll 25s linear infinite;
     }
 
-    .source-logo {
-      height: 18px;
-      vertical-align: middle;
-      margin-left: 5px;
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+    @media (max-width: 600px) {
+      header img { height: 60px; }
+      .news-card h3 { font-size: 1rem; }
     }
 
     body.dark .news-card {
@@ -173,20 +195,30 @@
   <header>
     <img src="logo.png" alt="شعار فلاش نيوز" />
     <h1>فلاش نيوز</h1>
+    <div>
+      <button onclick="toggleTheme()">🌓 الوضع</button>
+      <button onclick="toggleLang()">
+        🌐 <span id="lang-label">العربية</span>
+      </button>
+    </div>
   </header>
 
   <!-- ✅ شريط الأخبار المتحرك -->
-  <div class="ticker"><span id="ticker-text">تحميل آخر الأخبار...</span></div>
+  <div class="ticker"><span id="ticker-text">تحميل آخر العناوين...</span></div>
 
-  <!-- ✅ أزرار التحكم والتصنيفات -->
+  <!-- ✅ تبويبات الأقسام -->
   <div class="controls">
-    <button onclick="toggleTheme()">🌓 الوضع</button>
-    <button onclick="filterNews('all')">الكل</button>
-    <button onclick="filterNews('global')">عالمي</button>
-    <button onclick="filterNews('local')">محلي</button>
-    <button onclick="filterNews('economy')">اقتصاد</button>
-    <button onclick="filterNews('sports')">رياضة</button>
-    <button onclick="filterNews('tech')">تكنولوجيا</button>
+    <button onclick="filterByCategory('all')">📋 الكل</button>
+    <button onclick="filterByCategory('global')">🌍 عالمي</button>
+    <button onclick="filterByCategory('local')">🏠 محلي</button>
+    <button onclick="filterByCategory('economy')">💼 اقتصاد</button>
+    <button onclick="filterByCategory('sports')">⚽ رياضة</button>
+    <button onclick="filterByCategory('tech')">💻 تكنولوجيا</button>
+  </div>
+
+  <!-- ✅ فلترة حسب المصدر -->
+  <div class="filters" id="source-filters">
+    <!-- يتم توليدها تلقائيًا بالسكربت -->
   </div>
 
   <!-- ✅ خانة البحث -->
@@ -194,16 +226,23 @@
 
   <!-- ✅ الأخبار -->
   <div class="container" id="news-container">
-    <p>يتم تحميل الأخبار...</p>
+    <p>📡 جاري تحميل الأخبار...</p>
   </div>
 <script>
 const sources = [
   {
     name: "الجزيرة",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/6/69/Aljazeera_English_logo.svg",
+    logo: "https://upload.wikimedia.org/wikipedia/ar/0/0b/Aljazeera_net_logo.png",
     category: "global",
     lang: "ar",
     url: "https://api.rss2json.com/v1/api.json?rss_url=https://www.aljazeera.net/aljazeera/rss"
+  },
+  {
+    name: "سكاي نيوز عربية",
+    logo: "https://upload.wikimedia.org/wikipedia/ar/thumb/d/d7/Sky_News_Arabia_Logo.svg/320px-Sky_News_Arabia_Logo.svg.png",
+    category: "global",
+    lang: "ar",
+    url: "https://api.rss2json.com/v1/api.json?rss_url=https://www.skynewsarabia.com/web/rss/latest"
   },
   {
     name: "BBC Arabic",
@@ -213,99 +252,130 @@ const sources = [
     url: "https://api.rss2json.com/v1/api.json?rss_url=http://www.bbc.co.uk/arabic/index.xml"
   },
   {
-    name: "Sky News",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Sky-news-logo.png",
-    category: "global",
-    lang: "ar",
-    url: "https://api.rss2json.com/v1/api.json?rss_url=https://www.skynewsarabia.com/web/rss/latest"
-  },
-  {
-    name: "CNN (EN)",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/b/b1/CNN.svg",
-    category: "global",
-    lang: "en",
-    url: "https://api.rss2json.com/v1/api.json?rss_url=http://rss.cnn.com/rss/edition.rss"
-  },
-  {
-    name: "Reuters (EN)",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/7/75/Reuters-Logo.svg",
+    name: "العربية",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/1/1b/AlArabiya.svg",
     category: "economy",
-    lang: "en",
-    url: "https://api.rss2json.com/v1/api.json?rss_url=http://feeds.reuters.com/reuters/topNews"
+    lang: "ar",
+    url: "https://api.rss2json.com/v1/api.json?rss_url=https://www.alarabiya.net/.mrss/ar.xml"
+  },
+  {
+    name: "الشرق",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/c/ce/Asharq_News_logo.png",
+    category: "economy",
+    lang: "ar",
+    url: "https://api.rss2json.com/v1/api.json?rss_url=https://www.asharq.com/ar/rss"
   }
 ];
 
-const translateWords = {
-  "breaking": "عاجل", "explosion": "انفجار", "president": "رئيس", "election": "انتخابات",
-  "attack": "هجوم", "earthquake": "زلزال", "killed": "مقتل", "dead": "وفاة",
-  "fire": "حريق", "protest": "احتجاج", "storm": "عاصفة", "deal": "اتفاق",
-  "covid": "كورونا", "market": "السوق", "war": "حرب", "crisis": "أزمة"
+let allNews = [];
+let currentLang = navigator.language.startsWith('en') ? 'en' : 'ar';
+
+const translations = {
+  ar: {
+    "new": "🆕 جديد",
+    "share": "مشاركة",
+    "readMore": "اقرأ المزيد",
+    "copied": "تم نسخ الرابط",
+    "search": "ابحث عن خبر..."
+  },
+  en: {
+    "new": "🆕 New",
+    "share": "Share",
+    "readMore": "Read More",
+    "copied": "Link copied",
+    "search": "Search news..."
+  }
 };
 
-const container = document.getElementById("news-container");
-const ticker = document.getElementById("ticker-text");
-let allNews = [];
-
-function simpleTranslate(text) {
-  let words = text.toLowerCase().split(" ");
-  let translated = words.map(w => translateWords[w] || "").filter(Boolean);
-  return translated.length ? translated.join(" - ") : "";
+function t(key) {
+  return translations[currentLang][key] || key;
 }
 
-function loadNews() {
-  container.innerHTML = "";
-  ticker.textContent = "تحميل الأخبار...";
+function toggleTheme() {
+  document.body.classList.toggle('dark');
+}
+
+function toggleLang() {
+  currentLang = currentLang === 'ar' ? 'en' : 'ar';
+  document.documentElement.lang = currentLang;
+  document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+  document.getElementById("lang-label").innerText = currentLang === 'ar' ? "العربية" : "English";
+  loadNews(); // إعادة تحميل بالترجمة الصحيحة
+}
+
+function fetchNews() {
   allNews = [];
+  const container = document.getElementById('news-container');
+  container.innerHTML = '<p>📡 جاري تحميل الأخبار...</p>';
 
   sources.forEach(source => {
-    fetch(source.url)
-      .then(res => res.json())
-      .then(data => {
-        let items = data.items.slice(0, 5).map(item => ({
-          title: item.title,
-          link: item.link,
-          source: source.name,
-          category: source.category,
-          logo: source.logo,
-          translated: source.lang === "en" ? simpleTranslate(item.title) : "",
-          id: item.guid || item.link
-        }));
-
-        allNews.push(...items);
-        displayNews(allNews);
-        updateTicker();
-      })
-      .catch(() => {
-        console.warn(`فشل تحميل من ${source.name}`);
-      });
+    fetch(source.url).then(res => res.json()).then(data => {
+      const items = data.items.slice(0, 5).map(item => ({
+        ...item,
+        source: source.name,
+        category: source.category,
+        logo: source.logo,
+        lang: source.lang,
+        time: new Date(item.pubDate),
+        id: item.guid || item.link,
+        thumbnail: item.thumbnail || item.enclosure?.link || ""
+      }));
+      allNews.push(...items);
+      renderNews();
+    });
   });
 }
 
-function displayNews(newsArray) {
-  container.innerHTML = "";
-  newsArray.forEach(item => {
-    const card = document.createElement("div");
-    card.className = "news-card";
-    card.setAttribute("data-category", item.category);
+function renderNews() {
+  const container = document.getElementById('news-container');
+  const ticker = document.getElementById('ticker-text');
+  container.innerHTML = '';
+  ticker.innerText = allNews.slice(0, 5).map(n => n.title).join(' | ');
 
+  const filterCat = currentFilter || 'all';
+  const filterSource = currentSource || 'all';
+  const searchText = document.getElementById('search').value.toLowerCase();
+
+  let filtered = allNews.filter(n => {
+    const inCat = (filterCat === 'all' || n.category === filterCat);
+    const inSource = (filterSource === 'all' || n.source === filterSource);
+    const inSearch = n.title.toLowerCase().includes(searchText);
+    return inCat && inSource && inSearch;
+  });
+
+  filtered.sort((a, b) => b.time - a.time); // الأحدث أولاً
+
+  filtered.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'news-card';
+
+    const isNew = (Date.now() - item.time.getTime()) < 3600000;
     const isFav = localStorage.getItem(item.id);
 
     card.innerHTML = `
+      ${item.thumbnail ? `<img src="${item.thumbnail}" alt="صورة الخبر" class="thumb" />` : ""}
       <h3>
-        <img src="${item.logo}" class="source-logo" alt=""> ${item.title}
-        ${item.translated ? `<br><small>📝 ${item.translated}</small>` : ""}
+        <img src="${item.logo}" class="source-logo" style="height:18px;margin-left:5px;" />
+        ${item.title} ${isNew ? `<span style="color:red;">${t("new")}</span>` : ""}
       </h3>
-      <p>
-        <a href="${item.link}" target="_blank">رابط الخبر 🔗</a>
+      <small>📅 ${item.time.toLocaleDateString()} ⏰ ${item.time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</small>
+      <p>${item.description?.slice(0, 150)}...</p>
+      <div class="actions">
+        <a href="${item.link}" target="_blank">🔗 ${t("readMore")}</a>
         <span class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav('${item.id}', this)">⭐</span>
-      </p>
+        <button onclick="share('${item.link}')">${t("share")}</button>
+      </div>
     `;
     container.appendChild(card);
   });
-}
 
-function updateTicker() {
-  ticker.textContent = allNews.slice(0, 10).map(n => n.title).join(" | ");
+  // بناء قائمة المصادر
+  const sourcesEl = document.getElementById("source-filters");
+  sourcesEl.innerHTML = `<button onclick="filterBySource('all')">📡 الكل</button>`;
+  const unique = [...new Set(allNews.map(n => n.source))];
+  unique.forEach(s => {
+    sourcesEl.innerHTML += `<button onclick="filterBySource('${s}')">${s}</button>`;
+  });
 }
 
 function toggleFav(id, el) {
@@ -318,32 +388,39 @@ function toggleFav(id, el) {
   }
 }
 
-function toggleTheme() {
-  document.body.classList.toggle("dark");
+function share(link) {
+  navigator.clipboard.writeText(link);
+  alert(t("copied"));
 }
 
-function filterNews(type) {
-  if (type === "all") {
-    displayNews(allNews);
-  } else {
-    const filtered = allNews.filter(n => n.category === type);
-    displayNews(filtered);
-  }
+let currentFilter = 'all';
+let currentSource = 'all';
+
+function filterByCategory(cat) {
+  currentFilter = cat;
+  renderNews();
+}
+
+function filterBySource(src) {
+  currentSource = src;
+  renderNews();
 }
 
 function searchNews() {
-  const query = document.getElementById("search").value.toLowerCase();
-  const results = allNews.filter(n =>
-    n.title.toLowerCase().includes(query) ||
-    (n.translated && n.translated.toLowerCase().includes(query))
-  );
-  displayNews(results);
+  renderNews();
 }
 
-window.onload = loadNews;
+// تحديث كل دقيقة
+setInterval(fetchNews, 60000);
+
+// تحميل أول مرة
+window.onload = () => {
+  document.getElementById("lang-label").innerText = currentLang === 'ar' ? "العربية" : "English";
+  fetchNews();
+};
 </script>
-  <footer style="text-align:center; padding:20px; color:#666;">
-    جميع الحقوق محفوظة © فلاش نيوز 2025
+  <footer style="text-align:center; padding:20px; color:#666; font-size:0.9rem;">
+    جميع الحقوق محفوظة © فلاش نيوز 2025 | FlashNews
   </footer>
 </body>
 </html>
