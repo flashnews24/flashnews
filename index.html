@@ -1,29 +1,76 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="فلاش نيوز - تابع أحدث الأخبار من مصادر عربية موثوقة بشكل تلقائي">
-  <meta name="keywords" content="أخبار، عاجل، الجزيرة، العربية، سكاي نيوز، فلاش نيوز، RSS">
-  <meta name="author" content="FlashNews">
-  <title>فلاش نيوز | آخر الأخبار العربية</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>فلاش نيوز - Flash News</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      direction: rtl;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #6c2bd9;
+    }
+    .news-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .news-item {
+      background-color: white;
+      border-radius: 10px;
+      padding: 15px 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      border-right: 4px solid #6c2bd9;
+    }
+    .news-title {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .news-meta {
+      color: #888;
+      font-size: 0.9em;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>📰 فلاش نيوز</h1>
-    <p>آخر الأخبار العربية لحظة بلحظة</p>
-  </header>
+  <h1>🟣 فلاش نيوز - آخر الأخبار</h1>
+  <div class="news-container" id="news"></div>
 
-  <section id="main-news" class="news-section">
-    <h2>🗞️ الأخبار</h2>
-    <div class="loading">جاري تحميل الأخبار...</div>
-  </section>
+  <script>
+    async function fetchNews() {
+      try {
+        const res = await fetch("https://flashnews-api.onrender.com");
+        const data = await res.json();
+        const newsList = data.news;
+        const container = document.getElementById("news");
 
-  <footer>
-    <p>© 2025 فلاش نيوز - جميع الحقوق محفوظة</p>
-  </footer>
+        container.innerHTML = "";
+        newsList.forEach(item => {
+          const box = document.createElement("div");
+          box.className = "news-item";
+          box.innerHTML = `
+            <div class="news-title">${item.title}</div>
+            <div class="news-meta">📡 المصدر: ${item.source} | 🗂️ القسم: ${item.category} | 🕒 ${new Date(item.date).toLocaleString("ar-EG")}</div>
+          `;
+          container.appendChild(box);
+        });
+      } catch (error) {
+        document.getElementById("news").innerHTML = "⚠️ فشل تحميل الأخبار.";
+        console.error("Error loading news:", error);
+      }
+    }
 
-  <script src="main.js"></script>
+    fetchNews();
+    setInterval(fetchNews, 60000); // تحديث كل دقيقة
+  </script>
 </body>
 </html>
