@@ -1,49 +1,40 @@
-// رابط API الخاص بالأخبار الحقيقية
-const apiUrl = 'https://flashnews-api.onrender.com';
+const apiUrl = 'https://flashnews-api.onrender.com/';
 
 async function fetchNews() {
   try {
     const response = await fetch(apiUrl);
     const data = await response.json();
-
-    if (data.status === 'success') {
-      displayNews(data.news);
-    } else {
-      console.error('فشل في تحميل الأخبار:', data);
-    }
+    displayNews(data.news);
   } catch (error) {
-    console.error('خطأ في الاتصال بـ API:', error);
+    document.getElementById('news').innerHTML = '<p style="color: darkred;">⚠️ فشل تحميل الأخبار.</p>';
+    console.error('Error fetching news:', error);
   }
 }
 
-function displayNews(newsArray) {
-  const newsContainer = document.getElementById('news-container');
+function displayNews(news) {
+  const newsContainer = document.getElementById('news');
   newsContainer.innerHTML = '';
 
-  newsArray.forEach(item => {
-    const card = document.createElement('div');
-    card.className = 'news-card';
+  if (!news || news.length === 0) {
+    newsContainer.innerHTML = '<p>لا توجد أخبار متاحة حالياً.</p>';
+    return;
+  }
 
-    const title = document.createElement('h3');
-    title.textContent = item.title;
+  news.forEach(item => {
+    const article = document.createElement('div');
+    article.className = 'news-item';
 
-    const source = document.createElement('p');
-    source.innerHTML = `<strong>المصدر:</strong> ${item.source}`;
+    article.innerHTML = `
+      <h2>${item.title}</h2>
+      <p>📡 المصدر: ${item.source} | 🗂️ التصنيف: ${item.category} | 🕒 ${new Date(item.date).toLocaleString("ar-EG")}</p>
+    `;
 
-    const category = document.createElement('p');
-    category.innerHTML = `<strong>القسم:</strong> ${item.category}`;
-
-    const date = document.createElement('p');
-    date.innerHTML = `<strong>التاريخ:</strong> ${new Date(item.date).toLocaleString()}`;
-
-    card.appendChild(title);
-    card.appendChild(source);
-    card.appendChild(category);
-    card.appendChild(date);
-
-    newsContainer.appendChild(card);
+    newsContainer.appendChild(article);
   });
 }
 
-// تشغيل جلب الأخبار عند تحميل الصفحة
-window.onload = fetchNews;
+// تحميل الأخبار عند فتح الصفحة
+fetchNews();
+
+// تحديث الأخبار كل 60 ثانية تلقائيًا
+setInterval(fetchNews, 60000);
