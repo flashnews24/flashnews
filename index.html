@@ -1,84 +1,27 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>فلاش نيوز | آخر الأخبار لحظة بلحظة</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" href="favicon.png" type="image/png" />
-  <meta http-equiv="refresh" content="60" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="فلاش نيوز - تابع أحدث الأخبار من مصادر عربية موثوقة بشكل تلقائي">
+  <meta name="keywords" content="أخبار، عاجل، الجزيرة، العربية، سكاي نيوز، فلاش نيوز، RSS">
+  <meta name="author" content="FlashNews">
+  <title>فلاش نيوز | آخر الأخبار العربية</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header>
-    <div class="top-bar">
-      <h1>🗞️ فلاش نيوز</h1>
-      <button id="lang-toggle">English</button>
-    </div>
-    <div class="breaking-news">
-      <span>عاجل:</span>
-      <marquee direction="right" id="breaking-ticker">تحميل الأخبار العاجلة...</marquee>
-    </div>
-    <nav class="main-nav">
-      <ul>
-        <li><a href="#home">الرئيسية</a></li>
-        <li><a href="#breaking">عاجل</a></li>
-        <li><a href="#politics">سياسة</a></li>
-        <li><a href="#economy">اقتصاد</a></li>
-        <li><a href="#sports">رياضة</a></li>
-        <li><a href="#tech">تكنولوجيا</a></li>
-        <li><a href="#culture">ثقافة</a></li>
-        <li><a href="#video">فيديو</a></li>
-      </ul>
-    </nav>
+    <h1>📰 فلاش نيوز</h1>
+    <p>آخر الأخبار العربية لحظة بلحظة</p>
   </header>
 
-  <main>
-    <section id="slider" class="news-slider"></section>
-
-    <section id="home" class="news-section">
-      <h2>📰 الأخبار الرئيسية</h2>
-      <div class="news-grid" id="main-news"></div>
-    </section>
-
-    <section id="breaking" class="news-section">
-      <h2>🚨 عاجل</h2>
-      <div class="news-grid" id="breaking-news"></div>
-    </section>
-
-    <section id="politics" class="news-section">
-      <h2>🏛️ سياسة</h2>
-      <div class="news-grid" id="politics-news"></div>
-    </section>
-
-    <section id="economy" class="news-section">
-      <h2>💰 اقتصاد</h2>
-      <div class="news-grid" id="economy-news"></div>
-    </section>
-
-    <section id="sports" class="news-section">
-      <h2>⚽ رياضة</h2>
-      <div class="news-grid" id="sports-news"></div>
-    </section>
-
-    <section id="tech" class="news-section">
-      <h2>🧠 تكنولوجيا</h2>
-      <div class="news-grid" id="tech-news"></div>
-    </section>
-
-    <section id="culture" class="news-section">
-      <h2>🎭 ثقافة</h2>
-      <div class="news-grid" id="culture-news"></div>
-    </section>
-
-    <section id="video" class="news-section">
-      <h2>🎥 فيديو</h2>
-      <div class="news-grid" id="video-news"></div>
-    </section>
-  </main>
+  <section id="main-news" class="news-section">
+    <h2>🗞️ الأخبار</h2>
+    <div class="loading">جاري تحميل الأخبار...</div>
+  </section>
 
   <footer>
     <p>© 2025 فلاش نيوز - جميع الحقوق محفوظة</p>
-    <p><a href="sitemap.xml">خريطة الموقع</a> | <a href="mailto:contact@flashnews.com">اتصل بنا</a></p>
   </footer>
 
   <script src="main.js"></script>
