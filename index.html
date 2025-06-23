@@ -4,13 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>فلاش نيوز | آخر الأخبار لحظة بلحظة</title>
-  <meta name="description" content="تابع آخر الأخبار العاجلة والمحلية والعالمية من مصادر عربية موثوقة، بتحديث تلقائي كل دقيقة.">
-  <meta name="keywords" content="أخبار, عاجل, سياسة, اقتصاد, رياضة, تكنولوجيا, الجزيرة, العربية, فلاش نيوز">
-  <meta name="author" content="Flash News Team">
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" href="favicon.png" type="image/png" />
-  <link rel="alternate" hreflang="en" href="en/index.html" />
-  <meta http-equiv="refresh" content="60" /> <!-- تحديث كل دقيقة -->
+  <meta http-equiv="refresh" content="60" />
 </head>
 <body>
   <header>
@@ -35,10 +31,9 @@
       </ul>
     </nav>
   </header>
+
   <main>
-    <section id="slider" class="news-slider">
-      <!-- يتم تعبئة السلايدر تلقائيًا بأهم الأخبار -->
-    </section>
+    <section id="slider" class="news-slider"></section>
 
     <section id="home" class="news-section">
       <h2>📰 الأخبار الرئيسية</h2>
@@ -59,6 +54,7 @@
       <h2>💰 اقتصاد</h2>
       <div class="news-grid" id="economy-news"></div>
     </section>
+
     <section id="sports" class="news-section">
       <h2>⚽ رياضة</h2>
       <div class="news-grid" id="sports-news"></div>
@@ -84,56 +80,7 @@
     <p>© 2025 فلاش نيوز - جميع الحقوق محفوظة</p>
     <p><a href="sitemap.xml">خريطة الموقع</a> | <a href="mailto:contact@flashnews.com">اتصل بنا</a></p>
   </footer>
+
   <script src="main.js"></script>
-  <script>
-    // زر تغيير اللغة
-    document.getElementById("lang-toggle").onclick = () => {
-      const current = document.documentElement.lang;
-      window.location.href = current === "ar" ? "en/index.html" : "../index.html";
-    };
-
-    // شريط الأخبار العاجلة
-    fetch('data/breaking.json')
-      .then(res => res.json())
-      .then(data => {
-        const ticker = document.getElementById('breaking-ticker');
-        ticker.innerText = data.join(' ⚡ ');
-      });
-
-    // تحميل الأخبار لجميع الأقسام
-    const sections = ["main", "breaking", "politics", "economy", "sports", "tech", "culture", "video"];
-    sections.forEach(section => {
-      fetch(`data/${section}.json`)
-        .then(res => res.json())
-        .then(newsList => {
-          const container = document.getElementById(`${section}-news`);
-          newsList.forEach(news => {
-            const card = document.createElement('div');
-            card.className = "news-card";
-            card.innerHTML = `
-              <img src="${news.image}" alt="صورة الخبر">
-              <div class="news-content">
-                <h3>${news.title} ${news.isNew ? '🆕' : ''}</h3>
-                <p>${news.summary}</p>
-                <div class="meta">
-                  <span>${news.source}</span> | 
-                  <span>${news.date}</span>
-                </div>
-                <div class="actions">
-                  <a href="${news.url}" target="_blank">قراءة</a>
-                  <button onclick="shareNews('${news.url}')">🔗 مشاركة</button>
-                </div>
-              </div>
-            `;
-            container.appendChild(card);
-          });
-        });
-    });
-
-    function shareNews(url) {
-      navigator.clipboard.writeText(url);
-      alert("✅ تم نسخ رابط الخبر للمشاركة!");
-    }
-  </script>
 </body>
 </html>
